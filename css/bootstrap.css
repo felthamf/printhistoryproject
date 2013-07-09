@@ -225,10 +225,10 @@ textarea {
 
 body {
   margin: 0;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: calibri, Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 20px;
-  color: #555555;
+  color: #000000;
   background-color: #ffffff;
 }
 
@@ -328,6 +328,7 @@ a:focus {
 
 .span4 {
   width: 300px;
+  font-family: calibri;
 }
 
 .span3 {

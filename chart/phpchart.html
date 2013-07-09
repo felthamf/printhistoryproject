@@ -1,0 +1,250 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Tigers Attendance Graph</title>
+	<link rel="stylesheet" href="master.css">
+	<script src="d3.v2.min.js"></script>
+	<script src="xcharts.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<!--Adobe Edge Runtime-->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <script type="text/javascript" charset="utf-8" src="tigers_final_legend_edgePreload.js"></script>
+<!--Adobe Edge Runtime End-->
+
+</head>
+
+<body>
+
+<figure id="myChart" style="height:600px"></figure>
+
+<script>
+var tt = document.createElement('div')
+leftOffset = -(~~$('html').css('padding-left').replace('px', '') + ~~$('body').css('margin-left').replace('px', '')),
+  topOffset = -32;
+	tt.className = "tooltip"
+	document.body.appendChild(tt);
+var data = {
+	"main": [
+		{
+          "label": "businesses",
+		  "data": [
+            {
+              "x": 1890,
+              "y": 259430
+            },
+            {
+              "x": 1891,
+              "y": 189469
+            },
+            {
+              "x": 1892,
+              "y": 224523
+            },
+			{
+              "x": 1893,
+              "y": 177796
+            },
+			{
+              "x": 1894,
+              "y": 193384
+            },
+			{
+              "x": 1895,
+              "y": 174043
+            },
+			{
+              "x": 1896,
+              "y": 297079
+            },
+			{
+              "x": 1897,
+              "y": 436199
+            },
+			{
+              "x": 1898,
+              "y": 490490
+            },
+			{
+              "x": 1899,
+              "y": 391288
+            },
+			{
+              "x": 1900,
+              "y": 484988
+            },
+          ],
+        "className": ".attendance"
+        },
+      ],
+      "xScale": "ordinal",
+      "yScale": "linear",
+	  "comp": [
+	  	{
+		  "label": "wwi",
+		  "data": [
+		  {
+              "x": 1892,
+			  "y": 3500000
+            },
+			{
+              "x": 1918.5,
+			  "y": 3500000
+            },
+          ],
+		  "className": ".comp.wwi",
+          "type": "line"
+		},
+		{
+		  "label": "wwii",
+		  "data": [
+		  {
+              "x": 1941.5,
+			  "y": 3500000
+            },
+			{
+              "x": 1945,
+			  "y": 3500000
+            },
+          ],
+		  "className": ".comp.wwii",
+          "type": "line"
+		},
+		{
+		  "label": "greatdepression",
+		  "data": [
+		  {
+              "x": 1929.5,
+			  "y": 3500000
+            },
+			{
+              "x": 1941.5,
+			  "y": 3500000
+            },
+          ],
+		  "className": ".comp.greatdepression",
+          "type": "line"
+		},
+		{
+		  "label": "oilcrisis",
+		  "data": [
+		  {
+              "x": 1973,
+			  "y": 3500000
+            },
+			{
+              "x": 1979,
+			  "y": 3500000
+            },
+          ],
+		  "className": ".comp.oilcrisis",
+          "type": "line"
+		},
+		{
+		  "label": "recession",
+		  "data": [
+		  {
+              "x": 2008.5,
+			  "y": 3500000
+            },
+			{
+              "x": 2010,
+			  "y": 3500000
+            },
+          ],
+		  "className": ".comp.recession",
+          "type": "line"
+		},
+		{
+			"label": "vietnam",
+			"data": [
+			{
+				"x": 1964,
+				"y": 3500000
+			},
+			{
+				"x": 1973,
+				"y": 3500000
+			},
+		],
+		"className": ".comp.vietnam",
+          "type": "line"
+		},
+		{
+			"label": "korea",
+		  "data": [
+		  {
+              "x": 1950,
+			  "y": 3500000
+            },
+			{
+              "x": 1953,
+			  "y": 3500000
+            },
+          ],
+		  "className": ".comp.korea",
+          "type": "line"
+		},
+		{
+		  "label": "1980srecession",
+		  "data": [
+		  {
+              "x": 1980,
+			  "y": 3500000
+            },
+			{
+              "x": 1982,
+			  "y": 3500000
+            },
+          ],
+		  "className": ".comp.1980srecession",
+          "type": "line"
+		},
+		{
+			"label": "gulfwar",
+			"data": [
+			{
+				"x": 1990.5,
+				"y": 3500000
+			},
+			{
+				"x": 1991,
+				"y": 3500000
+			},
+		  ],
+		"className": ".comp.gulfwar",
+          "type": "line"
+		},
+		{
+			"label": "911wars",
+			"data": [
+			{
+				"x": 2001.5,
+				"y": 3500000
+			},
+			{
+				"x": 2008.5,
+				"y": 3500000
+			},
+		  ],
+		"className": ".comp.911wars",
+          "type": "line"
+		},		
+	]
+};
+var opts = {
+"mouseover": function (d, i) {
+	var pos = $(this).offset();
+    $(tt).text(d.x + ': ' + d.y + ' Attendees')
+	.css({top: topOffset + pos.top, left: pos.left + leftOffset})
+      .show();
+  },
+  "mouseout": function (x) {
+    $(tt).hide();
+  }
+  };
+var MyChart = new xChart('line-dotted', data, '#myChart', opts);
+</script>
+
+</body>
+</html>
