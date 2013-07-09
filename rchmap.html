@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
+  <script src='http://api.tiles.mapbox.com/mapbox.js/v1.0.2/mapbox.js'></script>
+  <link href='http://api.tiles.mapbox.com/mapbox.js/v1.0.2/mapbox.css' rel='stylesheet' />
+  <!--[if lte IE 8]>
+    <link href='http://api.tiles.mapbox.com/mapbox.js/v1.0.2/mapbox.ie.css' rel='stylesheet' >
+  <![endif]-->
+  <style>
+    body { margin:0; padding:0; }
+    #map { position:absolute; top:0; bottom:0; width:100%; }
+</style>
+</head>
+<body>
+<div id='map'></div>
+<style>
+.popup {
+    text-align: center;
+	font-family: calibri;
+}
+.popup img {
+    width: 100%;
+}
+</style>
+<script type='text/javascript'>
+var map = L.mapbox.map('map', 'floraf.map-l0h57soj');
+
+var geoJson = [{
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7775669334789, -41.28144441456689]},
+    "properties": {
+        "image": "http://www.teara.govt.nz/files/B173_2892_2B31_ATL.JPG",
+        "url": "http://en.wikipedia.org/wiki/Washington,_D.C.",
+        "marker-symbol": "star",
+		"marker-size": 'medium',
+		"marker-color": '#f0a',		
+        "title": "Harding, Wright and Eyre",
+		"description": "General Printer and Publisher",
+		"street": "Ballance & Maginnity Street",
+		"year": "1892"
+    }
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7775, -41.28144441456688]},
+    "properties": {
+        "image": "http://www.teara.govt.nz/files/B173_2892_2B31_ATL.JPG",
+        "url": "http://en.wikipedia.org/wiki/Washington,_D.C.",
+        "marker-symbol": "star",
+        "title": "Robert Coupland Harding",
+		"description": "General Printer and Publisher",
+		"street": "Ballance & Maginnity Street",
+		"year": "1892 - 1897"
+    }
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7760, -41.2895]},
+    "properties": {
+        "image": "http://www.teara.govt.nz/files/B173_2892_2B31_ATL.JPG",
+        "url": "http://en.wikipedia.org/wiki/Washington,_D.C.",
+        "marker-symbol": "star",
+        "title": "Robert Coupland Harding",
+		"description": "General Printer and Publisher",
+		"street": "Farish Street",
+		"year": "1897 - 1900"
+    }
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7769, -41.3072]},
+    "properties": {
+        "image": "http://www.teara.govt.nz/files/B173_2892_2B31_ATL.JPG",
+        "url": "http://en.wikipedia.org/wiki/Washington,_D.C.",
+        "marker-symbol": "star",
+        "title": "Robert Coupland Harding",
+		"description": "Printer",
+		"street": "John Street",
+		"year": "1900"
+    }
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.775995, -41.283277]},
+    "properties": {
+        "image": "http://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Chicago_sunrise_1.jpg/640px-Chicago_sunrise_1.jpg",
+        "url": "http://en.wikipedia.org/wiki/Chicago",
+        "title": "Messrs. Bock & Co.",
+		"description": "General Engraver, Die Sinker, Designer, etc.",
+		"street": "Brandon Street",
+		"year": "1889 - 1894"
+    }
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7763, -41.2832]},
+    "properties": {
+        "image": "http://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Chicago_sunrise_1.jpg/640px-Chicago_sunrise_1.jpg",
+        "url": "http://en.wikipedia.org/wiki/Chicago",
+        "title": "William Rose Bock",
+		"description": "General Engraver, Die Sinker, Designer, etc",
+		"street": "11 Brandon Street",
+		"year": "1894 - "
+    }
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7784, -41.2786]},
+    "properties": {
+        "image": "http://upload.wikimedia.org/wikipedia/commons/thumb/3/39/NYC_Top_of_the_Rock_Pano.jpg/640px-NYC_Top_of_the_Rock_Pano.jpg",
+        "url": "http://en.wikipedia.org/wiki/New_York_City",
+        "title": "Brown, Thomson & Co.",
+		"description": "Bookseller and Stationer",
+		"street": "Lambton Quay, Opposite the Government Buildings",
+		"year": "1890 - 1891"
+    } 
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7757, -41.2823]},
+    "properties": {
+        "image": "http://upload.wikimedia.org/wikipedia/commons/thumb/3/39/NYC_Top_of_the_Rock_Pano.jpg/640px-NYC_Top_of_the_Rock_Pano.jpg",
+        "url": "http://en.wikipedia.org/wiki/New_York_City",
+        "title": "Brown, Thomson & Co.",
+		"description": "Stationers, Booksellers, Printers, Engravers, Lithographers, Bookbinders, & Manufactoring Stationers",
+		"street": "111 Lambton Quay",
+		"year": "1893 - 1900"
+    } 
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7768, -41.2961]},
+    "properties": {
+        "image": "http://upload.wikimedia.org/wikipedia/commons/thumb/3/39/NYC_Top_of_the_Rock_Pano.jpg/640px-NYC_Top_of_the_Rock_Pano.jpg",
+        "url": "http://en.wikipedia.org/wiki/New_York_City",
+        "title": "Alfred Cousins",
+		"description": "Printer",
+		"street": "82 Taranaki Street",
+		"year": "1895"
+    } 
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7759, -41.2847]},
+    "properties": {
+        "image": "http://upload.wikimedia.org/wikipedia/commons/thumb/3/39/NYC_Top_of_the_Rock_Pano.jpg/640px-NYC_Top_of_the_Rock_Pano.jpg",
+        "url": "http://en.wikipedia.org/wiki/New_York_City",
+        "title": "Alfred Cousins",
+		"description": "Postage Stamp Die Engraver, Die Sinker, Medallist, Copper & Brass Plate Engraver",
+		"street": "National Chambers, Grey Street",
+		"year": "1896 - 1899"
+    } 
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7767, -41.2836]},
+    "properties": {
+        "image": "http://upload.wikimedia.org/wikipedia/commons/thumb/3/39/NYC_Top_of_the_Rock_Pano.jpg/640px-NYC_Top_of_the_Rock_Pano.jpg",
+        "url": "http://en.wikipedia.org/wiki/New_York_City",
+        "title": "Edwards, Russell & Co.",
+		"description": "Printers, Publishers & Paper Merchants",
+		"street": "Brandon Street",
+		"year": "1890 - 1895"
+    } 
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7769, -41.2832]},
+    "properties": {
+        "image": "http://upload.wikimedia.org/wikipedia/commons/thumb/3/39/NYC_Top_of_the_Rock_Pano.jpg/640px-NYC_Top_of_the_Rock_Pano.jpg",
+        "url": "http://en.wikipedia.org/wiki/New_York_City",
+        "title": "Edwards, Russell & Co.",
+		"description": "Printers, Publishers & Paper Merchants",
+		"street": "37 Featherston Street",
+		"year": "1896 - 1900"
+    } 
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7755, -41.2852]},
+    "properties": {
+        "image": "http://upload.wikimedia.org/wikipedia/commons/thumb/3/39/NYC_Top_of_the_Rock_Pano.jpg/640px-NYC_Top_of_the_Rock_Pano.jpg",
+        "url": "http://en.wikipedia.org/wiki/New_York_City",
+        "title": "McKee & Gamble",
+		"description": "Publishers, Engravers by all modern methods, Art Lithographers & Printers, Eletctrotypers & Stereotypers, Advertising Specialists, Paper Merchants, Manufactoring Stationers, etc",
+		"street": "Bank of New South Wales Building, Lambton Quay",
+		"year": "1892 - 1893"
+    } 
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7765, -41.2863]},
+    "properties": {
+        "image": "http://upload.wikimedia.org/wikipedia/commons/thumb/3/39/NYC_Top_of_the_Rock_Pano.jpg/640px-NYC_Top_of_the_Rock_Pano.jpg",
+        "url": "http://en.wikipedia.org/wiki/New_York_City",
+        "title": "McKee & Gamble",
+		"description": "Publishers, Engravers by all modern methods, Art Lithographers & Printers, Eletctrotypers & Stereotypers, Advertising Specialists, Paper Merchants, Manufactoring Stationers, etc",
+		"street": "6 Customhouse Quay",
+		"year": "1894 - 1900"
+    } 
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7753, -41.2845]},
+    "properties": {
+        "image": "http://upload.wikimedia.org/wikipedia/commons/thumb/3/39/NYC_Top_of_the_Rock_Pano.jpg/640px-NYC_Top_of_the_Rock_Pano.jpg",
+        "url": "http://en.wikipedia.org/wiki/New_York_City",
+        "title": "George William Dutton",
+		"description": "Bookseller and Stationer, The People's Book Mart",
+		"street": "49 Lambton Quay",
+		"year": "1890 - 1899"
+    } 
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7758, -41.2873]},
+    "properties": {
+        "image": "http://upload.wikimedia.org/wikipedia/commons/thumb/3/39/NYC_Top_of_the_Rock_Pano.jpg/640px-NYC_Top_of_the_Rock_Pano.jpg",
+        "url": "http://en.wikipedia.org/wiki/New_York_City",
+        "title": "George William Dutton",
+		"description": "Bookseller and Stationer, The People's Book Mart",
+		"street": "38 Willis Street",
+		"year": "1890 - 1891"
+    } 
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7787, -41.3106]},
+    "properties": {
+        "image": "http://upload.wikimedia.org/wikipedia/commons/thumb/3/39/NYC_Top_of_the_Rock_Pano.jpg/640px-NYC_Top_of_the_Rock_Pano.jpg",
+        "url": "http://en.wikipedia.org/wiki/New_York_City",
+        "title": "George William Dutton",
+		"description": "Bookseller and Stationer, The People's Book Mart",
+		"street": "Riddiford Street",
+		"year": "1895"
+    } 
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7837, -41.2938]},
+    "properties": {
+        "image": "http://upload.wikimedia.org/wikipedia/commons/thumb/3/39/NYC_Top_of_the_Rock_Pano.jpg/640px-NYC_Top_of_the_Rock_Pano.jpg",
+        "url": "http://en.wikipedia.org/wiki/New_York_City",
+        "title": "George William Dutton",
+		"description": "Bookseller and Stationer, The People's Book Mart",
+		"street": "81 Courtenay Place",
+		"year": "1896 - 1897"
+    } 
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7754, -41.2881]},
+    "properties": {
+        "image": "http://upload.wikimedia.org/wikipedia/commons/thumb/3/39/NYC_Top_of_the_Rock_Pano.jpg/640px-NYC_Top_of_the_Rock_Pano.jpg",
+        "url": "http://en.wikipedia.org/wiki/New_York_City",
+        "title": "George William Dutton",
+		"description": "Bookseller and Stationer, The People's Book Mart",
+		"street": "60 Willis Street",
+		"year": "1900"
+    } 
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7757, -41.2876]},
+    "properties": {
+        "image": "http://upload.wikimedia.org/wikipedia/commons/thumb/3/39/NYC_Top_of_the_Rock_Pano.jpg/640px-NYC_Top_of_the_Rock_Pano.jpg",
+        "url": "http://en.wikipedia.org/wiki/New_York_City",
+        "title": "Stephen William Green",
+		"description": "Bookbinder and Finisher",
+		"street": "44a Willis Street",
+		"year": "1895 - 1897"
+    } 
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7766, -41.2865]},
+    "properties": {
+        "image": "http://upload.wikimedia.org/wikipedia/commons/thumb/3/39/NYC_Top_of_the_Rock_Pano.jpg/640px-NYC_Top_of_the_Rock_Pano.jpg",
+        "url": "http://en.wikipedia.org/wiki/New_York_City",
+        "title": "Stephen William Green",
+		"description": "Bookbinder and Finisher",
+		"street": "Harbour Street",
+		"year": "1897 - 1899"
+    } 
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7751, -41.2887]},
+    "properties": {
+        "image": "http://upload.wikimedia.org/wikipedia/commons/thumb/3/39/NYC_Top_of_the_Rock_Pano.jpg/640px-NYC_Top_of_the_Rock_Pano.jpg",
+        "url": "http://en.wikipedia.org/wiki/New_York_City",
+        "title": "W. H. Green &. Co.",
+		"description": "Wholesale Stationer and Fancy Goods Dealer",
+		"street": "Customhouse Street",
+		"year": "1892 - 1895"
+    } 
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7769, -41.2874]},
+    "properties": {
+        "image": "http://upload.wikimedia.org/wikipedia/commons/thumb/3/39/NYC_Top_of_the_Rock_Pano.jpg/640px-NYC_Top_of_the_Rock_Pano.jpg",
+        "url": "http://en.wikipedia.org/wiki/New_York_City",
+        "title": "W. H. Green &. Co.",
+		"description": "Wholesale Stationer and Fancy Goods Dealer",
+		"street": "Victoria Street",
+		"year": "1896 - 1899"
+    } 
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7785, -41.2921]},
+    "properties": {
+        "image": "http://upload.wikimedia.org/wikipedia/commons/thumb/3/39/NYC_Top_of_the_Rock_Pano.jpg/640px-NYC_Top_of_the_Rock_Pano.jpg",
+        "url": "http://en.wikipedia.org/wiki/New_York_City",
+        "title": "Arthur Gyles",
+		"description": "Printer, Rubber Stamp Maker, and Importer of Type and Printers' Requisites",
+		"street": "Manners Street",
+		"year": "1890 - 1890"
+    } 
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7753, -41.2837]},
+    "properties": {
+        "image": "http://upload.wikimedia.org/wikipedia/commons/thumb/3/39/NYC_Top_of_the_Rock_Pano.jpg/640px-NYC_Top_of_the_Rock_Pano.jpg",
+        "url": "http://en.wikipedia.org/wiki/New_York_City",
+        "title": "Robert Holliday & Co.",
+		"description": "Booksellers, and Stationers, and Importers of Fancy Goods, etc",
+		"street": "Stationers Hall, 81 Lambton Quay",
+		"year": "1890 - 1900"
+    } 
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7759, -41.2861]},
+    "properties": {
+        "image": "http://upload.wikimedia.org/wikipedia/commons/thumb/3/39/NYC_Top_of_the_Rock_Pano.jpg/640px-NYC_Top_of_the_Rock_Pano.jpg",
+        "url": "http://en.wikipedia.org/wiki/New_York_City",
+        "title": "Samuel George Ross",
+		"description": "Engraver, Die Sinker, Electroplater, and Gilder",
+		"street": "9 Lambton Quay",
+		"year": "1894"
+    } 
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7750, -41.2884]},
+    "properties": {
+        "image": "http://upload.wikimedia.org/wikipedia/commons/thumb/3/39/NYC_Top_of_the_Rock_Pano.jpg/640px-NYC_Top_of_the_Rock_Pano.jpg",
+        "url": "http://en.wikipedia.org/wiki/New_York_City",
+        "title": "Samuel George Ross",
+		"description": "Engraver, Die Sinker, Electroplater, and Gilder",
+		"street": "55 Willis Street",
+		"year": "1895 - 1898"
+    } 
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7762, -41.2868]},
+    "properties": {
+        "image": "http://upload.wikimedia.org/wikipedia/commons/thumb/3/39/NYC_Top_of_the_Rock_Pano.jpg/640px-NYC_Top_of_the_Rock_Pano.jpg",
+        "url": "http://en.wikipedia.org/wiki/New_York_City",
+        "title": "Samuel George Ross",
+		"description": "Engraver, Die Sinker, Electroplater, and Gilder",
+		"street": "8 Willis Street",
+		"year": "1899"
+    } 
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7754, -41.2882]},
+    "properties": {
+        "image": "http://upload.wikimedia.org/wikipedia/commons/thumb/3/39/NYC_Top_of_the_Rock_Pano.jpg/640px-NYC_Top_of_the_Rock_Pano.jpg",
+        "url": "http://en.wikipedia.org/wiki/New_York_City",
+        "title": "New Zealand Bible, Book & Tract Society",
+		"description": "A useful society established in 1889",
+		"street": "62a Willis Street",
+		"year": "1890 - 1900"
+    } 
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7757, -41.2831]},
+    "properties": {
+        "image": "http://upload.wikimedia.org/wikipedia/commons/thumb/3/39/NYC_Top_of_the_Rock_Pano.jpg/640px-NYC_Top_of_the_Rock_Pano.jpg",
+        "url": "http://en.wikipedia.org/wiki/New_York_City",
+        "title": "Frederick George Routh",
+		"description": "General Printer, Account Book Manufaturer, Paper Ruler, and Gold Blocker",
+		"street": "Brandon Street",
+		"year": "1900"
+    } 
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.777150, -41.28298]},
+    "properties": {
+        "image": "http://upload.wikimedia.org/wikipedia/commons/thumb/3/39/NYC_Top_of_the_Rock_Pano.jpg/640px-NYC_Top_of_the_Rock_Pano.jpg",
+        "url": "http://en.wikipedia.org/wiki/New_York_City",
+        "title": "Frederick George Routh",
+		"description": "General Printer, Account Book Manufaturer, Paper Ruler, and Gold Blocker",
+		"street": "Featherston & Johnston Street",
+		"year": "1900"
+    } 
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [ 174.7759, -41.2906]}, 
+    "properties": {
+        "image": "http://upload.wikimedia.org/wikipedia/commons/thumb/3/39/NYC_Top_of_the_Rock_Pano.jpg/640px-NYC_Top_of_the_Rock_Pano.jpg",
+        "url": "http://en.wikipedia.org/wiki/New_York_City",
+        "title": "James Frederick Ryder",
+		"description": "Bookseller and Printer",
+		"street": "41 Manners Street",
+		"year": "1894 - 1896"
+    } 
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7761, -41.2908]},
+    "properties": {
+        "image": "http://upload.wikimedia.org/wikipedia/commons/thumb/3/39/NYC_Top_of_the_Rock_Pano.jpg/640px-NYC_Top_of_the_Rock_Pano.jpg",
+        "url": "http://en.wikipedia.org/wiki/New_York_City",
+        "title": "James Frederick Ryder",
+		"description": "Bookseller and Printer",
+		"street": "53 Manners Street",
+		"year": "1897 - 1900"
+    } 
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7744, -41.2895]},
+    "properties": {
+        "image": "http://upload.wikimedia.org/wikipedia/commons/thumb/3/39/NYC_Top_of_the_Rock_Pano.jpg/640px-NYC_Top_of_the_Rock_Pano.jpg",
+        "url": "http://en.wikipedia.org/wiki/New_York_City",
+        "title": "Charles Henry Williams",
+		"description": "General Engraver, Electroplater and Gilder",
+		"street": "85 Willis Street",
+		"year": "1890 - 1899"
+    } 
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.77637, -41.283204]},
+    "properties": {
+        "image": "http://upload.wikimedia.org/wikipedia/commons/thumb/3/39/NYC_Top_of_the_Rock_Pano.jpg/640px-NYC_Top_of_the_Rock_Pano.jpg",
+        "url": "http://en.wikipedia.org/wiki/New_York_City",
+        "title": "Andrew Given & Co.",
+		"description": "Paper Merchant and Printer's Broker",
+		"street": "11 Brandon Street",
+		"year": "1891 - 1899"
+    } 
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7781, -41.2880]},
+    "properties": {
+        "image": "http://upload.wikimedia.org/wikipedia/commons/thumb/3/39/NYC_Top_of_the_Rock_Pano.jpg/640px-NYC_Top_of_the_Rock_Pano.jpg",
+        "url": "http://en.wikipedia.org/wiki/New_York_City",
+        "title": "Andrew Given & Co.",
+		"description": "Paper Merchant and Printer's Broker",
+		"street": "Jervois Quay",
+		"year": "1900 - "
+    } 
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7754, -41.285]},
+    "properties": {
+        "image": "http://upload.wikimedia.org/wikipedia/commons/thumb/3/39/NYC_Top_of_the_Rock_Pano.jpg/640px-NYC_Top_of_the_Rock_Pano.jpg",
+        "url": "http://en.wikipedia.org/wiki/New_York_City",
+        "title": "Lyon & Blair",
+		"description": "Wholesale & Retail Booksellers & Stationers & Account Book Manufacturers, Letterpress & Lithographic Printers",
+		"street": "John Street",
+		"year": "1874 - 1894"
+    } 
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7753, -41.285]},
+    "properties": {
+        "image": "http://upload.wikimedia.org/wikipedia/commons/thumb/3/39/NYC_Top_of_the_Rock_Pano.jpg/640px-NYC_Top_of_the_Rock_Pano.jpg",
+        "url": "http://en.wikipedia.org/wiki/New_York_City",
+        "title": "Whitcombe & Tombs, Ltd",
+		"description": "Printer",
+		"street": "John Street",
+		"year": "1894 - "
+    } 
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7767, -41.2795]},
+    "properties": {
+        "image": "http://upload.wikimedia.org/wikipedia/commons/thumb/3/39/NYC_Top_of_the_Rock_Pano.jpg/640px-NYC_Top_of_the_Rock_Pano.jpg",
+        "url": "http://en.wikipedia.org/wiki/New_York_City",
+        "title": "Samuel & William Mackay",
+		"description": "Booksellers, Stationers, and News Agents",
+		"street": "201 Lambton Quay",
+		"year": "1881 - "
+    } 
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7757, -41.2930]},
+    "properties": {
+        "image": "http://upload.wikimedia.org/wikipedia/commons/thumb/3/39/NYC_Top_of_the_Rock_Pano.jpg/640px-NYC_Top_of_the_Rock_Pano.jpg",
+        "url": "http://en.wikipedia.org/wiki/New_York_City",
+        "title": "Samuel & William Mackay",
+		"description": "Booksellers, Stationers, and News Agents",
+		"street": "47 Cuba Street",
+		"year": "1881 - "
+    } 
+}, 
+];
+
+// Add custom popups to each using our custom feature properties
+map.markerLayer.on('layeradd', function(e) {
+    var marker = e.layer,
+        feature = marker.feature;
+
+    // Create custom popup content
+    var popupContent =  '<a target="_blank" class="popup" href="' + feature.properties.url + '">' +
+                            '<img src="' + feature.properties.image + '">' +
+                        '<h2>' + feature.properties.title + '</h2>' +
+						'</a>' + feature.properties.description + '<p>' + "Situated at " + feature.properties.street + ": " + feature.properties.year + '</p>';
+
+    // http://leafletjs.com/reference.html#popup
+    marker.bindPopup(popupContent,{
+        closeButton: false,
+        minWidth: 320
+    });
+});
+
+// Add features to the map
+map.markerLayer.setGeoJSON(geoJson);
+
+map.setView([-41.287, 174.779], 15);
+</script>
+</body>
+</html>
