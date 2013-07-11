@@ -32,13 +32,14 @@ var geoJson = [{
     type: 'Feature',
     "geometry": { "type": "Point", "coordinates": [174.7775669334789, -41.28144441456689]},
     "properties": {
-        "image": "images/lysaght.jpg",
-        "url": "www.",
+        "image": "images/lysaghtad.jpg",
+        "url": "http://nzetc.victoria.ac.nz/tm/scholarly/tei-HalPota-t1-front-d2-d1.html",
         "marker-symbol": "star",
 		"marker-color": '#F0B2F0',		
         "title": "Harding, Wright and Eyre",
-		"description": "General Printer and Publisher",
-		"street": "Ballance & Maginnity Street",
+		"description": "Printer and Publisher",
+		"source": "Papers Past",
+		"street": "Lysaght's Buildings, Ballance & Maginnity Streets",
 		"year": "1892"
     }
 }, {
@@ -46,11 +47,12 @@ var geoJson = [{
     "geometry": { "type": "Point", "coordinates": [174.7775, -41.28144441456688]},
     "properties": {
         "image": "images/lysaght.jpg",
-        "url": "http://www.teara.govt.nz/en/biographies/2h13/harding-robert-coupland",
+        "url": "http://nzetc.victoria.ac.nz/tm/scholarly/tei-Har01Typo.html",
         "marker-symbol": "star",
 		"marker-color": '#F0B2F0',
         "title": "Robert Coupland Harding",
 		"description": "General Printer and Publisher",
+		"source": "Private collection",
 		"street": "Ballance & Maginnity Street",
 		"year": "1892 - 1897"
     }
@@ -59,7 +61,7 @@ var geoJson = [{
     "geometry": { "type": "Point", "coordinates": [174.7760, -41.2895]},
     "properties": {
         "image": "http://www.teara.govt.nz/files/B173_2892_2B31_ATL.JPG",
-        "url": "http://en.wikipedia.org/wiki/Washington,_D.C.",
+        "url": "http://www.teara.govt.nz/en/biographies/2h13/harding-robert-coupland",
         "marker-symbol": "star",
    		"marker-color": '#F0B2F0',
 		"title": "Robert Coupland Harding",
@@ -71,11 +73,12 @@ var geoJson = [{
     type: 'Feature',
     "geometry": { "type": "Point", "coordinates": [174.7769, -41.3072]},
     "properties": {
-        "image": "http://www.teara.govt.nz/files/H048_3113_2H13_HB.JPG",
-        "url": "http://en.wikipedia.org/wiki/Washington,_D.C.",
+        "image": "http://nzetc.victoria.ac.nz/etexts/SheTypo/SheTypo002a(h280).jpg",
+        "url": "http://www.teara.govt.nz/en/biographies/2h13/harding-robert-coupland",
         "marker-symbol": "star",
 		"marker-color": '#F0B2F0',
         "title": "Robert Coupland Harding",
+		"source": "Te Ara Encyclopedia of New Zealand", 
 		"description": "Printer",
 		"street": "John Street",
 		"year": "1900"
@@ -105,14 +108,15 @@ var geoJson = [{
 		"year": "1894 - "
     }
 }, {
-    type: 'Feature',
+    type: 'Feature',	
     "geometry": { "type": "Point", "coordinates": [174.7784, -41.2786]},
     "properties": {
-        "image": "http://upload.wikimedia.org/wikipedia/commons/thumb/3/39/NYC_Top_of_the_Rock_Pano.jpg/640px-NYC_Top_of_the_Rock_Pano.jpg",
-        "url": "http://en.wikipedia.org/wiki/New_York_City",
+        "image": "http://natlib.govt.nz/thumbnails/?resize=664&src=http%3A%2F%2Fndhadeliver.natlib.govt.nz%2FNLNZStreamGate%2Fget%3Fdps_pid%3DIE527443",
+        "url": "http://natlib.govt.nz/records/21293092?search%5Bi%5D%5Bcentury%5D=1800&search%5Bi%5D%5Bdecade%5D=1890&search%5Bi%5D%5Bprimary_collection%5D=National+Library+of+New+Zealand+Catalogue&search%5Bi%5D%5Bsubject%5D=Real+property+--+New+Zealand+--+Wellington+--+Maps&search%5Bil%5D%5Bcategory%5D=Images&search%5Bpath%5D=items",
         "title": "Brown, Thomson & Co.",
 		"marker-color": '#F0B2F0',		
 		"description": "Bookseller and Stationer",
+		"source": "National Library of New Zealand",
 		"street": "Lambton Quay, Opposite the Government Buildings",
 		"year": "1890 - 1891"
     } 
@@ -522,9 +526,9 @@ map.markerLayer.on('layeradd', function(e) {
 
     // Create custom popup content
     var popupContent =  '<a target="_blank" class="popup" href="' + feature.properties.url + '">' +
-                            '<img src="' + feature.properties.image + '">' +
+                            '<img src="' + feature.properties.image + '">' + 
                         '<h2 class="popup">' + feature.properties.title + '</h2>' +
-						'</a>' + '<p class="popup">' + feature.properties.description + '</p>' + '<p class="popup">' + "Situated at " + feature.properties.street + ": " + feature.properties.year + '</p>';
+						'</a>' + '<p class="popup">' + feature.properties.description + '</p>' + '<p class="popup">' + "Situated at " + feature.properties.street + ": " + feature.properties.year + '</p>' + '<span class="popup">' + "Image: " + feature.properties.source + '</span>';
 
     // http://leafletjs.com/reference.html#popup
     marker.bindPopup(popupContent,{
