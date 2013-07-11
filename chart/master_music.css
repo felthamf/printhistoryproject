@@ -205,14 +205,14 @@ pre{
 	display:block;
 	fill:rgba(242,101,34,0.1)
 }
-.color1 .line{stroke:rgba(255,255,0,0.3); stroke-width: 20px}.color1 rect,.color1 circle{fill:#4da944}.color1 .fill{fill:rgba(77,169,68,0.1)}.color1.comp .line{stroke: rgba(255,255,0,0.3);stroke-width:20px}
+.color1 .line{stroke:rgba(0,102,51,0.2); stroke-width: 20px}.color1 rect,.color1 circle{fill:#4da944}.color1 .fill{fill:rgba(77,169,68,0.1)}.color1.comp .line{stroke: rgba(0,0,153,0.2);stroke-width:20px}
 
-.color1.comp rect{fill:rgba(255,255,0,0.2)}
+.color1.comp rect{fill:rgba(0,0,153,0.2)}
 .color1.comp .fill{fill:none}
 
 .color1.comp circle,
 .color1.comp .pointer{
-	fill:rgba(255,255,0,0.3)
+	fill:rgba(0,0,153,0.2)
 }
 .color1.comp.lineshade .fill,
 .color1.comp.lineshadeup .fill{
