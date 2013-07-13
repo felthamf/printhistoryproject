@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Number of Businesses in Wellington</title>
+<link rel="stylesheet" href="business.css">
+
+<script src="d3.v2.min.js"></script>
+<script src="xcharts.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+</head>
+
+<body>
+
+<figure class="xchart" id="myChart" style='height:600px; width:1000px'></figure>
+
+<script>
+
+var tt = document.createElement('div')
+leftOffset = -(~~$('html').css('padding-left').replace('px', '') + ~~$('body').css('margin-left').replace('px', '')),
+  topOffset = -32;
+	tt.className = "tooltip"
+	document.body.appendChild(tt);
+
+var data = {
+	"main": [
+		{
+          "label": "issues",
+		  "data": [
+            {
+              "x": 1890,
+              "y": 12
+            },
+            {
+              "x": 1891,
+              "y": 12
+            },
+            {
+              "x": 1892,
+              "y": 8
+            },
+			{
+              "x": 1893,
+              "y": 3
+            },
+			{
+              "x": 1894,
+              "y": 1
+            },
+			{
+              "x": 1895,
+              "y": 0
+            },
+			{
+              "x": 1896,
+              "y": 0
+            },
+			{
+              "x": 1897,
+              "y": 1
+            },
+			{
+              "x": 1898,
+              "y": 0
+            },
+			{
+              "x": 1899,
+              "y": 0
+            },
+			{
+              "x": 1900,
+              "y": 0
+            },			
+          ],
+        "className": ".issues"
+        },
+      ],
+      "xScale": "ordinal",
+      "yScale": "linear",
+};
+
+var opts = {
+"mouseover": function (d, i) {
+	var pos = $(this).offset();
+    $(tt).text(d.x + ': ' + d.y)
+	.css({top: topOffset + pos.top, left: pos.left + leftOffset})
+      .show();
+  },
+  "mouseout": function (x) {
+    $(tt).hide();
+  }
+  };	
+	
+var MyChart = new xChart('line-dotted', data, '#myChart', opts);
+  </script>
+</body>
+</html>
