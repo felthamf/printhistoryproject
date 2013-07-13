@@ -660,6 +660,7 @@ p {
   font-size: 21px;
   font-weight: 200;
   line-height: 30px;
+  font-family: calibri;
 }
 
 small {
@@ -679,7 +680,10 @@ cite {
 }
 
 .muted {
-  color: #999999;
+
+color: #999999;
+font-family:calibri;
+font-size: 30px;
 }
 
 a.muted:hover,

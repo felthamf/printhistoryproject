@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Places</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
+  <script src='http://api.tiles.mapbox.com/mapbox.js/v1.0.2/mapbox.js'></script>
+  <link href='http://api.tiles.mapbox.com/mapbox.js/v1.0.2/mapbox.css' rel='stylesheet' />
+  <!--[if lte IE 8]>
+    <link href='http://api.tiles.mapbox.com/mapbox.js/v1.0.2/mapbox.ie.css' rel='stylesheet' >
+  <![endif]-->
+ <style>
+    body { margin:0; padding:0; }
+    #map { position:absolute; top:0; bottom:0; width:100%; }
+
+	.popup {
+    text-align: center;
+	font-family: calibri;
+	font-size:16px;
+}
+	.popup img {
+    width: 100%;
+}
+</style>
+
+</head>
+
+<body>
+
+<div id='map'></div>
+
+<script type='text/javascript'>
+
+var slidercontrol = null;	
+
+var map = L.mapbox.map('map', 'floraf.map-491b84rx');
+
+var geoJson = [{
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7775669334789, -41.28144441456689]},
+    "properties": {
+        "image": "images/lysaghtad.jpg",
+        "url": "http://paperspast.natlib.govt.nz/cgi-bin/paperspast?a=d&cl=search&d=EP18890412.2.39.7&srpos=139&e=--1885---1900--100-EP-101-byDA---0lysaght+building--",
+		"marker-symbol": "star",
+		"marker-color": '#F0B2F0',		
+        "title": "Harding, Wright and Eyre",
+		"work" :"<a href='http://nzetc.victoria.ac.nz/tm/scholarly/tei-HalPota-t1-front-d2-d1.html'>View their work?</a>",		
+		"bio": "http://www.teara.govt.nz/en/biographies/2h13/harding-robert-coupland",
+		"description": "Printer and Publisher",
+		"street": "Lysaght's Buildings, Ballance & Maginnity Streets",
+		"year": "1892"
+    }
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7775, -41.28144441456688]},
+    "properties": {
+        "image": "images/lysaght.jpg",
+        "url": "http://nzetc.victoria.ac.nz/tm/scholarly/tei-Har01Typo.html",
+        "marker-symbol": "star",
+		"marker-color": '#F0B2F0',
+        "title": "Robert Coupland Harding",
+		"work": "<a href='http://nzetc.victoria.ac.nz/tm/scholarly/tei-Har01Typo.html'>View his work?</a>",
+		"bio": "http://www.teara.govt.nz/en/biographies/2h13/harding-robert-coupland",
+		"description": "General Printer and Publisher",
+		"street": "Lysaght's Buildings, Ballance & Maginnity Street",
+		"year": "1892 - 1897"
+    }
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7760, -41.2895]},
+    "properties": {
+        "image": "images/farish.jpg",
+        "url": "http://nzetc.victoria.ac.nz/tm/scholarly/WarEarl-fig-WarEarl224b.html",
+        "marker-symbol": "star",
+   		"marker-color": '#F0B2F0',
+		"title": "Robert Coupland Harding",
+		"work": "<a href='http://nzetc.victoria.ac.nz/tm/scholarly/name-407905.html'>View his work?</a>",
+		"bio": "http://nzetc.victoria.ac.nz/tm/scholarly/tei-Cyc01Cycl-t1-body-d4-d56-d14.html",
+		"description": "General Printer and Publisher",
+		"street": "Farish Street, on the right",
+		"year": "1897 - 1900"
+    }
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7769, -41.3072]},
+    "properties": {
+        "image": "http://natlib.govt.nz/thumbnails/?resize=664&src=http%3A%2F%2Fndhadeliver.natlib.govt.nz%2FNLNZStreamGate%2Fget%3Fdps_pid%3DIE516615",
+        "url": "http://natlib.govt.nz/records/22820824",
+        "marker-symbol": "star",
+		"marker-color": '#F0B2F0',
+        "title": "Robert Coupland Harding",
+		"bio" : "http://nzetc.victoria.ac.nz/tm/scholarly/tei-Cyc01Cycl-t1-body-d4-d56-d14.html", 
+		"work" : "<a href='http://nzetc.victoria.ac.nz/tm/scholarly/name-407905.html'>View his work?</a>",
+		"description": "Printer",
+		"street": "John Street",
+		"year": "1900"
+    }
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.775995, -41.283277]},
+    "properties": {
+        "image": "images/pbock.jpg",
+        "url": "http://www.teara.govt.nz/en/biographies/2b31/bock-william-rose",
+        "title": "Messrs. Bock & Co.",
+		"work" : "<a href='http://natlib.govt.nz/records/22681012'>View their work?</a>",
+		"bio": "http://www.teara.govt.nz/en/biographies/2b31/bock-william-rose",
+		"description": "General Engraver, Die Sinker, Designer, etc.",
+		"marker-color": '#F0B2F0',		
+		"street": "Brandon Street",
+		"year": "1889 - 1894"
+    }
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7763, -41.2832]},
+    "properties": {
+        "image": "images/pbock.jpg",
+        "url": "http://www.teara.govt.nz/en/biographies/2b31/bock-william-rose",
+        "title": "William Rose Bock",
+		"work": "<a href='http://natlib.govt.nz/records/22493643'>View his work?</a>",
+		"bio": "http://nzetc.victoria.ac.nz/tm/scholarly/tei-Cyc01Cycl-t1-body-d4-d56-d1.html",
+		"marker-color": '#F0B2F0',		
+		"description": "General Engraver, Die Sinker, Designer, etc",
+		"action" : "read Bock's biography",
+		"street": "11 Brandon Street",
+		"year": "1894 - "
+    }
+}, {
+    type: 'Feature',	
+    "geometry": { "type": "Point", "coordinates": [174.7784, -41.2786]},
+    "properties": {
+        "image": "images/charlottestreet.jpg",
+        "url": "http://www.aucklandcity.govt.nz/dbtw-wpd/exec/dbtwpub.dll?BU=http%3A%2F%2Fwww.aucklandcity.govt.nz%2Fdbtw-wpd%2FHeritageImages%2Findex.htm&AC=QBE_QUERY&TN=heritageimages&QF0=ID&NP=2&MR=5&RF=HIORecordSearch&QI0=%3D%2235-R1833%22",
+        "title": "Brown, Thomson & Co.",
+		"work" : "<a href='http://natlib.govt.nz/records/21293092?search%5Bi%5D%5Bcentury%5D=1800&search%5Bi%5D%5Bdecade%5D=1890&search%5Bi%5D%5Bprimary_collection%5D=National+Library+of+New+Zealand+Catalogue&search%5Bi%5D%5Bsubject%5D=Real+property+--+New+Zealand+--+Wellington+--+Maps&search%5Bil%5D%5Bcategory%5D=Images&search%5Bpath%5D=items'>View their work?</a>",
+		"bio": "http://nzetc.victoria.ac.nz/tm/scholarly/tei-Cyc01Cycl-t1-body-d4-d56-d2.html",
+		"marker-color": '#F0B2F0',		
+		"description": "Bookseller and Stationer",
+		"source": "National Library of New Zealand",
+		"street": "Corner of Lambton Quay & Charlotte Street, opposite Government Buildings",
+		"year": "1890 - 1891"
+    } 
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7757, -41.2823]},
+    "properties": {
+        "image": "images/brownthomson1.jpg",
+        "url": "http://paperspast.natlib.govt.nz/cgi-bin/paperspast?a=d&cl=search&d=EP18951129.2.54.3&srpos=329&e=-------100-EP-301-byDA---2Brown+Thomson--",
+        "title": "Brown, Thomson & Co.",
+		"work" : "<a href='http://nzetc.victoria.ac.nz/tm/scholarly/tei-KacFath.html'>View their work?</a>",
+		"bio": "http://nzetc.victoria.ac.nz/tm/scholarly/tei-Cyc01Cycl-t1-body-d4-d56-d2.html",		
+		"description": "Stationers, Booksellers, Printers, Engravers, Lithographers, Bookbinders, & Manufactoring Stationers",
+		"marker-color": '#F0B2F0',		
+		"street": "111 Lambton Quay",
+		"year": "1893 - "
+    } 
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7759, -41.2847]},
+    "properties": {
+        "image": "http://natlib.govt.nz/thumbnails/?resize=664&src=http%3A%2F%2Fndhadeliver.natlib.govt.nz%2FNLNZStreamGate%2Fget%3Fdps_pid%3DIE165237",
+        "url": "http://natlib.govt.nz/records/22825372",
+        "title": "Alfred Cousins",
+		"work" : "<a href='http://collections.tepapa.govt.nz/ObjectDetails.aspx?irn=1107224'>View his work?</a>",
+		"bio": "http://nzetc.victoria.ac.nz/tm/scholarly/tei-Cyc01Cycl-t1-body-d4-d56-d3.html",				
+		"marker-color": '#F0B2F0',		
+		"description": "Postage Stamp Die Engraver, Die Sinker, Medallist, Copper & Brass Plate Engraver",
+		"street": "National Chambers, Grey Street",
+		"year": "1896 - 1899"
+    } 
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7767, -41.2836]},
+    "properties": {
+        "image": "images/pedwards.jpg",
+        "url": "http://en.wikipedia.org/wiki/New_York_City",
+        "title": "Edwards, Russell & Co.",
+		"work" : " ",
+		"bio": "http://nzetc.victoria.ac.nz/tm/scholarly/tei-Cyc01Cycl-t1-body-d4-d56-d6.html",				
+		"marker-color": '#F0B2F0',		
+		"description": "Printers, Publishers & Paper Merchants",
+		"street": "Brandon Street",
+		"year": "1890 - 1895"
+    } 
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7769, -41.2832]},
+    "properties": {
+        "image": "images/edwardrussell.jpg",
+        "url": "http://nzetc.victoria.ac.nz//tm/scholarly/tei-Cyc01Cycl-t1-body-d4-d56-d9.html",
+        "title": "Edwards, Russell & Co.",
+		"work" : " ",
+		"bio": "http://nzetc.victoria.ac.nz/tm/scholarly/tei-Cyc01Cycl-t1-body-d4-d56-d9.html",		
+		"marker-color": '#F0B2F0',		
+		"description": "Printers, Publishers & Paper Merchants",
+		"street": "37 Featherston Street",
+		"year": "1896 - 1899"
+    } 
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7755, -41.2852]},
+    "properties": {
+        "image": "http://natlib.govt.nz/thumbnails/?resize=664&src=http%3A%2F%2Fndhadeliver.natlib.govt.nz%2FNLNZStreamGate%2Fget%3Fdps_pid%3DIE3694403",
+        "url": "http://natlib.govt.nz/records/23140802",
+        "title": "McKee & Gamble",
+		"work" : " ",
+		"bio": "http://nzetc.victoria.ac.nz/tm/scholarly/tei-Cyc01Cycl-t1-body-d4-d56-d7.html",		
+		"marker-color": '#F0B2F0',		
+		"description": "Publishers, Engravers by all modern methods, Art Lithographers & Printers, Eletctrotypers & Stereotypers, Advertising Specialists, Paper Merchants, Manufactoring Stationers, etc",
+		"street": "Bank of New South Wales Building, Lambton Quay",
+		"year": "1892 - 1893"
+    } 
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7765, -41.2863]},
+    "properties": {
+        "image": "images/mckeegambleimg.jpg",
+        "url": "http://nzetc.victoria.ac.nz/tm/scholarly/tei-Cyc01Cycl-t1-body-d4-d56-d18.html",
+        "title": "McKee & Gamble",
+		"work" : " ",
+		"bio": "http://nzetc.victoria.ac.nz/tm/scholarly/tei-Cyc01Cycl-t1-body-d4-d56-d18.html",				
+		"marker-color": '#F0B2F0',			
+		"description": "Publishers, Engravers by all modern methods, Art Lithographers & Printers, Eletctrotypers & Stereotypers, Advertising Specialists, Paper Merchants, Manufactoring Stationers, etc",
+		"street": "6 Customhouse Quay",
+		"year": "1894 -"
+    } 
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7753, -41.2845]},
+    "properties": {
+        "image": "http://natlib.govt.nz/thumbnails/?resize=664&src=http%3A%2F%2Fndhadeliver.natlib.govt.nz%2FNLNZStreamGate%2Fget%3Fdps_pid%3DIE166829",
+        "url": "http://natlib.govt.nz/records/22323186?search%5Bi%5D%5Bname_authority_id%5D=667676&search%5Bpath%5D=items",
+		"marker-color": '#F0B2F0',	        
+		"title": "George William Dutton",
+		"work" : " ",
+		"bio": "http://nzetc.victoria.ac.nz/tm/scholarly/tei-Cyc01Cycl-t1-body-d4-d56-d8.html",				
+		"description": "Bookseller and Stationer, The People's Book Mart",
+		"street": "49 Lambton Quay",
+		"year": "1890 - 1899"
+    } 
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7758, -41.2873]},
+    "properties": {
+        "image": "images/duttonwillis1.jpg",
+        "url": "http://paperspast.natlib.govt.nz/cgi-bin/paperspast?a=d&cl=search&d=EP18910304.2.2.3&srpos=493&e=-------100--401-byDA---0george+dutton+bookseller--",
+        "title": "George William Dutton",
+		"work" : " ",
+		"bio": "http://nzetc.victoria.ac.nz/tm/scholarly/tei-Cyc01Cycl-t1-body-d4-d56-d8.html",					
+		"marker-color": '#F0B2F0',			
+		"description": "Bookseller and Stationer, The People's Book Mart",
+		"street": "38 Willis Street",
+		"year": "1890 - 1891"
+    } 
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7787, -41.3106]},
+    "properties": {
+        "image": "http://natlib.govt.nz/thumbnails/?resize=664&src=http%3A%2F%2Fndhadeliver.natlib.govt.nz%2FNLNZStreamGate%2Fget%3Fdps_pid%3DIE342370",
+        "url": "http://natlib.govt.nz/records/23044926",
+        "title": "George William Dutton",
+		"work" : " ",
+		"bio": "http://nzetc.victoria.ac.nz/tm/scholarly/tei-Cyc01Cycl-t1-body-d4-d56-d8.html",				
+		"marker-color": '#F0B2F0',			
+		"description": "Bookseller and Stationer, The People's Book Mart",
+		"street": "Riddiford Street",
+		"year": "1895"
+    } 
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7837, -41.2938]},
+    "properties": {
+        "image": "http://natlib.govt.nz/thumbnails/?resize=664&src=http%3A%2F%2Fndhadeliver.natlib.govt.nz%2FNLNZStreamGate%2Fget%3Fdps_pid%3DIE326751",
+        "url": "http://natlib.govt.nz/records/23167009?search%5Bpath%5D=items&search%5Btext%5D=george+dutton",
+        "title": "George William Dutton",
+		"work" : " ",
+		"bio": "http://nzetc.victoria.ac.nz/tm/scholarly/tei-Cyc01Cycl-t1-body-d4-d56-d8.html",				
+		"marker-color": '#F0B2F0',			
+		"description": "Bookseller and Stationer, The People's Book Mart",
+		"street": "81 Courtenay Place",
+		"year": "1896 - 1897"
+    } 
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7754, -41.2881]},
+    "properties": {
+        "image": "images/duttonwillis.jpg",
+        "url": "http://paperspast.natlib.govt.nz/cgi-bin/paperspast?a=d&cl=search&d=EP19000623.2.73.3&srpos=548&e=-------100--501-byDA---0george+dutton+bookseller--",
+        "title": "George William Dutton",
+		"work" : " ",
+		"bio": "http://nzetc.victoria.ac.nz/tm/scholarly/tei-Cyc01Cycl-t1-body-d4-d56-d8.html",				
+		"marker-color": '#F0B2F0',			
+		"description": "Bookseller and Stationer, The People's Book Mart",
+		"street": "60 Willis Street",
+		"year": "1900 - "
+    } 
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7757, -41.2876]},
+    "properties": {
+        "image": "images/pswgreen.jpg",
+        "url": "http://nzetc.victoria.ac.nz/tm/scholarly/tei-Cyc01Cycl-t1-body-d4-d56-d11.html",
+        "title": "Stephen William Green",
+		"work" : " ",
+		"bio": "http://nzetc.victoria.ac.nz/tm/scholarly/tei-Cyc01Cycl-t1-body-d4-d56-d11.html",				
+		"marker-color": '#F0B2F0',			
+		"description": "Bookbinder and Finisher",
+		"street": "44a Willis Street",
+		"year": "1895 - 1897"
+    } 
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7766, -41.2865]},
+    "properties": {
+        "image": "images/swgreen1.jpg",
+        "url": "http://paperspast.natlib.govt.nz/cgi-bin/paperspast?a=d&cl=search&d=EP18990124.2.2.5&srpos=202&e=-------100--201-byDA---2s%2e+w%2e+green--",
+        "title": "Stephen William Green",
+		"work" : " ",
+		"bio": "http://nzetc.victoria.ac.nz/tm/scholarly/tei-Cyc01Cycl-t1-body-d4-d56-d11.html",				
+		"marker-color": '#F0B2F0',			
+		"description": "Bookbinder and Finisher",
+		"street": "Harbour Street",
+		"year": "1897 - 1899"
+    } 
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7751, -41.2887]},
+    "properties": {
+        "image": "http://nzetc.victoria.ac.nz/etexts/Har06Typo/Har06Typo089b(h280).jpg",
+        "url": "http://nzetc.victoria.ac.nz//tm/scholarly/tei-Har06Typo-t1-g1-t7-body-d14.html",
+        "title": "W. H. Green &. Co.",
+		"work" : " ",
+		"bio": "http://nzetc.victoria.ac.nz/tm/scholarly/tei-Cyc01Cycl-t1-body-d4-d56-d12.html",				
+		"marker-color": '#F0B2F0',			
+		"description": "Wholesale Stationer and Fancy Goods Dealer",
+		"street": "Old Customhouse Street",
+		"year": "1892 - 1895"
+    } 
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7769, -41.2874]},
+    "properties": {
+        "image": "http://www.digitalnz.org/thumbnails/from_large/664/?resize=520x840&src=http%3A%2F%2Fwww.aucklandcity.govt.nz%2Fdbtw-wpd%2FHeritageImages%2Fimages%2FAWNf%2F1905%2FAWNS_19050420_p006_i002_x.jpg",
+        "url": "http://www.aucklandcity.govt.nz/dbtw-wpd/exec/dbtwpub.dll?BU=http%3A%2F%2Fwww.aucklandcity.govt.nz%2Fdbtw-wpd%2FHeritageImages%2Findex.htm&AC=QBE_QUERY&TN=heritageimages&QF0=ID&NP=2&MR=5&RF=HIORecordSearch&QI0=%3D%22AWNS-19050420-6-2%22",
+        "title": "W. H. Green &. Co.",
+		"work" : " ",
+		"bio": "http://nzetc.victoria.ac.nz/tm/scholarly/tei-Cyc01Cycl-t1-body-d4-d56-d12.html",				
+		"marker-color": '#F0B2F0',			
+		"description": "Wholesale Stationer and Fancy Goods Dealer",
+		"street": "Victoria Street",
+		"year": "1896 - 1899"
+    } 
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7785, -41.2921]},
+    "properties": {
+        "image": "images/gyles.jpg",
+        "url": "http://paperspast.natlib.govt.nz/cgi-bin/paperspast?a=d&cl=search&d=EP18910912.2.52.5&srpos=19&e=-------100--1-byDA---2gyles+printer--",
+        "title": "Arthur Gyles",
+		"work" : " ",
+		"bio": "http://nzetc.victoria.ac.nz/tm/scholarly/tei-Cyc01Cycl-t1-body-d4-d56-d13.html",				
+		"marker-color": '#F0B2F0',			
+		"description": "Printer, Rubber Stamp Maker, and Importer of Type and Printers' Requisites",
+		"street": "106 Manners Street, opposite Fire Brigade Station",
+		"year": "1884 - "
+    } 
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7753, -41.2837]},
+    "properties": {
+        "image": "images/holliday.jpg",
+        "url": "http://en.wikipedia.org/wiki/New_York_City",
+        "title": "Robert Holliday & Co.",
+		"work" : " ",
+		"bio": "http://paperspast.natlib.govt.nz/cgi-bin/paperspast?a=d&cl=search&d=WC19010608.2.37.4&srpos=1098&e=-------100--1001-byDA---2Robert+Holliday--",				
+		"marker-color": '#F0B2F0',			
+		"description": "Booksellers, and Stationers, and Importers of Fancy Goods, etc",
+		"street": "Stationers Hall, 81 Lambton Quay",
+		"year": " - 1900"
+    } 
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7759, -41.2861]},
+    "properties": {
+        "image": "images/ross2.jpg",
+        "url": "http://paperspast.natlib.govt.nz/cgi-bin/paperspast?a=d&cl=search&d=WDT18950923.2.26.5&srpos=149&e=-------100--101-byDA---0S+Ross+engraver--",
+        "title": "Samuel George Ross",
+		"work" : " ",
+		"bio": "http://nzetc.victoria.ac.nz/tm/scholarly/tei-Cyc01Cycl-t1-body-d4-d56-d20.html",				
+		"marker-color": '#F0B2F0',			
+		"description": "Engraver, Die Sinker, Electroplater, and Gilder",
+		"street": "9 Lambton Quay",
+		"year": "1894"
+    } 
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7762, -41.2868]},
+    "properties": {
+        "image": "images/ross1.jpg",
+        "url": "http://paperspast.natlib.govt.nz/cgi-bin/paperspast?a=d&cl=search&d=EP18971213.2.2.5&srpos=27&e=-------100-EP-1-byDA---0ross+engraver--",
+        "title": "Samuel George Ross",
+		"work" : " ",
+		"bio": "http://nzetc.victoria.ac.nz/tm/scholarly/tei-Cyc01Cycl-t1-body-d4-d56-d20.html",				
+		"marker-color": '#F0B2F0',			
+		"description": "Engraver, Die Sinker, Electroplater, and Gilder",
+		"street": "8 Willis Street",
+		"year": "1897 - 1899"
+    } 
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7750, -41.2884]}, 
+    "properties": {
+        "image": "images/ross2.jpg",
+        "url": "http://paperspast.natlib.govt.nz/cgi-bin/paperspast?a=d&cl=search&d=EP18961224.2.3&srpos=22&e=-------100-EP-1-byDA---0ross+engraver--",
+        "title": "Samuel George Ross",
+		"work" : " ",
+		"bio": "http://nzetc.victoria.ac.nz/tm/scholarly/tei-Cyc01Cycl-t1-body-d4-d56-d20.html",				
+		"marker-color": '#F0B2F0',			
+		"description": "Engraver, Die Sinker, Electroplater, and Gilder",
+		"street": "55 Willis Street",
+		"year": "1895 - 1896"
+    } 
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7754, -41.2882]},
+    "properties": {
+        "image": "images/biblesoc.jpg",
+        "url": "http://paperspast.natlib.govt.nz/cgi-bin/paperspast?a=d&cl=search&d=EP18941215.2.43.1&srpos=18&e=-------100--1-byDA---262a+willis+street--",
+        "title": "New Zealand Bible, Book & Tract Society",
+		"work" : " ",
+		"bio": "http://nzetc.victoria.ac.nz/tm/scholarly/tei-Cyc01Cycl-t1-body-d4-d56-d19.htm",			
+		"marker-color": '#F0B2F0',			
+		"description": "A useful society established in 1889",
+		"street": "62a Willis Street",
+		"year": "1890 - 1900"
+    } 
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7757, -41.2831]},
+    "properties": {
+        "image": "images/routh2.jpg",
+        "url": "http://paperspast.natlib.govt.nz/cgi-bin/paperspast?a=d&cl=search&d=EP18900515.2.53.2&srpos=42&e=-------100--1-byDA---0routh+brandon--",
+        "title": "Frederick George Routh",
+		"work" : " ",
+		"bio": "http://nzetc.victoria.ac.nz/tm/scholarly/tei-Cyc01Cycl-t1-body-d4-d56-d21.html",				
+		"marker-color": '#F0B2F0',			
+		"description": "General Printer, Account Book Manufaturer, Paper Ruler, and Gold Blocker",
+		"street": "Brandon Street",
+		"year": "1890 - 1891"
+    } 
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.777150, -41.28298]},
+    "properties": {
+        "image": "images/routh1.jpg",
+        "url": "http://paperspast.natlib.govt.nz/cgi-bin/paperspast?a=d&cl=search&d=EP18950401.2.50.6&srpos=23&e=-------100--1-byDA---2Routh+printer--",
+        "title": "Frederick George Routh",
+		"work" : " ",
+		"bio": "http://nzetc.victoria.ac.nz/tm/scholarly/tei-Cyc01Cycl-t1-body-d4-d56-d21.html",				
+		"marker-color": '#F0B2F0',	
+		"description": "General Printer, Account Book Manufaturer, Paper Ruler, and Gold Blocker",
+		"street": "Featherston & Johnston Street",
+		"year": "1892 - "
+    } 
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [ 174.7759, -41.2906]}, 
+    "properties": {
+        "image": "images/ryder2.jpg",
+        "url": "http://paperspast.natlib.govt.nz/cgi-bin/paperspast?a=d&cl=search&d=CHP18960229.2.82&srpos=25&e=-------100--1-byDA---0ryder+manners+street--",
+        "title": "James Frederick Ryder",
+		"work" : " ",
+		"bio": "http://nzetc.victoria.ac.nz/tm/scholarly/tei-Cyc01Cycl-t1-body-d4-d56-d22.html",				
+		"marker-color": '#F0B2F0',			
+		"description": "Bookseller and Printer",
+		"street": "41 Manners Street",
+		"year": "1894 - 1896"
+    } 
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7761, -41.2908]},
+    "properties": {
+        "image": "images/ryder.jpg",
+        "url": "http://paperspast.natlib.govt.nz/cgi-bin/paperspast?a=d&cl=search&d=EP19010117.2.58.2&srpos=23&e=-------100-EP-1-byDA---0J+ryder+manners--",
+        "title": "James Frederick Ryder",
+		"work" : " ",
+		"bio": "http://nzetc.victoria.ac.nz/tm/scholarly/tei-Cyc01Cycl-t1-body-d4-d56-d22.html",				
+		"marker-color": '#F0B2F0',	
+		"description": "Bookseller and Printer",
+		"street": "53 Manners Street",
+		"year": "1897 - "
+    } 
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7744, -41.2895]},
+    "properties": {
+        "image": "images/williams.jpg",
+        "url": "http://paperspast.natlib.govt.nz/cgi-bin/paperspast?a=d&cl=search&d=EP18791202.2.33.2&srpos=7&e=-------100-EP-1-byDA---0williams+engraver+willis--",
+        "title": "Charles Henry Williams",
+		"work" : " ",
+		"bio": "http://nzetc.victoria.ac.nz/tm/scholarly/tei-Cyc01Cycl-t1-body-d4-d56-d23.html",				
+		"marker-color": '#F0B2F0',			
+		"description": "General Engraver, Electroplater and Gilder",
+		"street": "85 Willis Street",
+		"year": "1877 - 1899"
+    } 
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.77637, -41.283204]},
+    "properties": {
+        "image": "images/given2.jpg",
+        "url": "http://paperspast.natlib.govt.nz/cgi-bin/paperspast?a=d&cl=search&d=EP18941120.2.48.6&srpos=2&e=-------100-EP%2cNZFL%2cWDT-1-byDA---0%22andrew+given%22--",
+        "title": "Andrew Given & Co.",
+		"work" : " ",
+		"bio": "http://nzetc.victoria.ac.nz/tm/scholarly/tei-Cyc01Cycl-t1-body-d4-d56-d10.html",				
+		"marker-color": '#F0B2F0',			
+		"description": "Paper Merchant and Printer's Broker",
+		"street": "11 Brandon Street",
+		"year": "1891 - 1899"
+    } 
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7781, -41.2880]},
+    "properties": {
+        "image": "images/given1.jpg",
+        "url": "http://paperspast.natlib.govt.nz/cgi-bin/paperspast?a=d&cl=search&d=EP18970723.2.2.7&srpos=40&e=-------100--1-byDA---2%22andrew+given%22--",
+        "title": "Andrew Given & Co.",
+		"work" : " ",
+		"bio": "http://nzetc.victoria.ac.nz/tm/scholarly/tei-Cyc01Cycl-t1-body-d4-d56-d10.html",				
+		"marker-color": '#F0B2F0',			
+		"description": "Paper Merchant and Printer's Broker",
+		"street": "Jervois Quay",
+		"year": "1900 - "
+    } 
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7754, -41.285]},
+    "properties": {
+        "image": "images/lyonblair.jpg",
+        "url": "rchmap.html",
+        "title": "Lyon & Blair",
+		"work" : " ",
+		"bio": "http://www.teara.govt.nz/en/biographies/2b26/blair-john-rutherfurd",				
+		"marker-color": '#F0B2F0',			
+		"description": "Wholesale & Retail Booksellers & Stationers & Account Book Manufacturers, Letterpress & Lithographic Printers",
+		"street": "35 - 37 Lambton Quay",
+		"year": "1874 - 1894"
+    } 
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7753, -41.285]},
+    "properties": {
+        "image": "http://natlib.govt.nz/thumbnails/?resize=664&src=http%3A%2F%2Fndhadeliver.natlib.govt.nz%2FNLNZStreamGate%2Fget%3Fdps_pid%3DIE454940",
+        "url": "http://natlib.govt.nz/records/22897110",
+        "title": "Whitcombe & Tombs, Ltd",
+		"work" : "",
+		"bio": "http://www.teara.govt.nz/en/biographies/3w9/whitcombe-bertie-ernest-hawkes",				
+		"marker-color": '#F0B2F0',			
+		"description": "Booksellers, Publishers, Engravers, Printers, Stationers, Lithographers & Bookbinders",
+		"street": "37 Lambton Quay",
+		"year": "1894 - "
+    } 
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7767, -41.2795]},
+    "properties": {
+        "image": "http://natlib.govt.nz/thumbnails/?resize=664&src=http%3A%2F%2Fndhadeliver.natlib.govt.nz%2FNLNZStreamGate%2Fget%3Fdps_pid%3DIE155805",
+        "url": "http://natlib.govt.nz/records/22708895",
+        "title": "Samuel & William Mackay",
+		"work" : " ",
+		"bio": "http://nzetc.victoria.ac.nz/tm/scholarly/tei-Cyc01Cycl-t1-body-d4-d56-d17.html",				
+		"marker-color": '#F0B2F0',			
+		"description": "Booksellers, Stationers, and News Agents",
+		"street": "201 Lambton Quay",
+		"year": "1881 - "
+    } 
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [174.7757, -41.2930]},
+    "properties": {
+        "image": "http://www.digitalnz.org/thumbnails/from_large/664/?resize=520x840&src=http%3A%2F%2Fndhadeliver.natlib.govt.nz%2FNLNZStreamGate%2Fget%3Fdps_pid%3DIE60334",
+        "url": "http://natlib.govt.nz/records/23117287",
+        "title": "Samuel & William Mackay",
+		"work" : " ",
+		"bio": "http://nzetc.victoria.ac.nz/tm/scholarly/tei-Cyc01Cycl-t1-body-d4-d56-d17.html",				
+		"marker-color": '#F0B2F0',	
+		"description": "Booksellers, Stationers, and News Agents",
+		"street": "47 Cuba Street",
+		"year": "1881 - "
+    } 
+}, 
+];
+
+// Add custom popups to each using our custom feature properties
+map.markerLayer.on('layeradd', function(e) {
+    var marker = e.layer,
+        feature = marker.feature;
+
+    // Create custom popup content
+    var popupContent =  '<a target="_blank" class="popup" href="' + feature.properties.url + '">' +
+                            '<img src="' + feature.properties.image + '">' + '</a>' + '<a target="_blank" class="popup" href="' + feature.properties.bio + '">' + '<h2 class="popup">' + feature.properties.title + '</h2>' + '</a>' + '<p class="popup">' + '<em>' + feature.properties.description + '</em>' + '</p>' + '<p class="popup">' + "Situated at " + feature.properties.street + ": " + feature.properties.year + '</p>' + '<p style="font-family:calibri; font-size:12px">' + feature.properties.work;
+
+    // http://leafletjs.com/reference.html#popup
+    marker.bindPopup(popupContent,{
+        closeButton: false,
+        minWidth: 320
+    });
+});
+
+// Add features to the map
+map.markerLayer.setGeoJSON(geoJson);
+
+map.setView([-41.287, 174.779], 15);
+</script>
+
+
+</body>
+</html>
