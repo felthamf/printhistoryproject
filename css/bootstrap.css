@@ -225,7 +225,7 @@ textarea {
 
 body {
   margin: 0;
-  font-family: calibri, Helvetica, Arial, sans-serif;
+  font-family: calibri;
   font-size: 14px;
   line-height: 20px;
   color: #000000;
@@ -657,10 +657,11 @@ p {
 
 .lead {
   margin-bottom: 20px;
-  font-size: 21px;
+  font-size: 24px;
   font-weight: 200;
   line-height: 30px;
   font-family: calibri;
+  text-align: center;
 }
 
 small {
