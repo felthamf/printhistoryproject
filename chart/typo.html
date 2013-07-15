@@ -2,12 +2,13 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Number of Businesses in Wellington</title>
-<link rel="stylesheet" href="business.css">
+<title>RCH's Publishing in Wellington</title>
+<link rel="stylesheet" href="typo.css">
 
 <script src="d3.v2.min.js"></script>
 <script src="xcharts.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
 </head>
 
 <body>
@@ -74,9 +75,65 @@ var data = {
           ],
         "className": ".issues"
         },
-      ],
-      "xScale": "ordinal",
-      "yScale": "linear",
+		
+		],
+		"xScale": "ordinal",
+		"yScale": "linear",
+	  "comp": [
+	  	{
+		  "label": "other",
+		  "data": [
+            {
+              "x": 1890,
+              "y": 4
+            },
+            {
+              "x": 1891,
+              "y": 0
+            },
+            {
+              "x": 1892,
+              "y": 2
+            },
+			{
+              "x": 1893,
+              "y": 2
+            },
+			{
+              "x": 1894,
+              "y": 5
+            },
+			{
+              "x": 1895,
+              "y": 4
+            },
+			{
+              "x": 1896,
+              "y": 5
+            },
+			{
+              "x": 1897,
+              "y": 4
+            },
+			{
+              "x": 1898,
+              "y": 0
+            },
+			{
+              "x": 1899,
+              "y": 0
+            },
+			{
+              "x": 1900,
+              "y": 0
+            },	
+          ],
+		  "className": ".comp.other",
+          "type": "line-dotted"
+		  
+		},		
+    ]		
+
 };
 
 var opts = {
@@ -89,7 +146,8 @@ var opts = {
   "mouseout": function (x) {
     $(tt).hide();
   }
-  };	
+
+ };	
 	
 var MyChart = new xChart('line-dotted', data, '#myChart', opts);
   </script>
